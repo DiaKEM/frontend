@@ -1,6 +1,10 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "@diakem/frontend",
+  "version": "0.0.0",
+  "author": {
+    "name": "Selcuk Kekec",
+    "email": "khskekec@gmail.com"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
