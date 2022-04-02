@@ -7,6 +7,10 @@
   },
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.3",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -45,6 +49,9 @@
       "node": true
     },
     "extends": [
+      "react-app",
+      "eslint:recommended",
+      "plugin:react/recommended",
       "airbnb-base",
       "plugin:@typescript-eslint/recommended",
       "plugin:import/recommended",
@@ -54,12 +61,24 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": "latest",
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
     },
-    "plugins": ["@typescript-eslint"],
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "rules": {
-      "import/no-default-export": ["error"],
-      "import/prefer-default-export": ["off"],
+      "react/jsx-curly-brace-presence": [
+        "error"
+      ],
+      "import/no-default-export": [
+        "error"
+      ],
+      "import/prefer-default-export": [
+        "off"
+      ],
       "import/extensions": [
         "error",
         "ignorePackages",
@@ -83,8 +102,7 @@
             "type"
           ],
           "alphabetize": {
-            "order":
-            "asc",
+            "order": "asc",
             "caseInsensitive": true
           }
         }
@@ -135,6 +153,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.0",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.1",
     "webpack": "^5.71.0"
   }
