@@ -1,24 +1,35 @@
-import { PhotoCamera } from '@mui/icons-material';
-import { Button, IconButton } from '@mui/material';
+import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import './App.css';
-import { Provider } from 'react-redux';
-import { store } from './core/redux/store';
+import { getEnvironment, getReactEnvVar } from './core/utils/environment';
 
-export const App = () => (
-  <Provider store={store}>
-    <div className="App">
-      <Button variant="contained" color="secondary">
-        ASD
-      </Button>
-      <IconButton
-        color="primary"
-        aria-label="upload picture"
-        component="span"
-        size="small"
-      >
-        <PhotoCamera />
-      </IconButton>
+const GET_ALL_USER = gql`
+  query GetUser {
+    userMany {
+      name
+    }
+  }
+`;
+const Test = () => {
+  const { loading, error, data } = useQuery(GET_ALL_USER);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return <pre>{JSON.stringify(data)}</pre>;
+};
+
+export const App = () => {
+  const isInstalled = getReactEnvVar('DIAKEM_BACKEND_API');
+
+  if (!isInstalled) {
+    return <div>NOT INSTALLED</div>;
+  }
+
+  return (
+    <div>
+      <h1>Environment Mode: {getEnvironment()}</h1>
+      <h1>API-URL: {isInstalled}</h1>
     </div>
-  </Provider>
-);
+  );
+};
