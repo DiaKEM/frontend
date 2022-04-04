@@ -2,11 +2,14 @@ import { ApolloProvider } from '@apollo/client';
 import React, { StrictMode } from 'react';
 import './index.css';
 import { createRoot } from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { client } from './core/apollo-client/client';
 import { store } from './core/redux/store';
 import { reportWebVitals } from './reportWebVitals';
+import 'simplebar/src/simplebar.css';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 const root = createRoot(rootElement);
@@ -15,7 +18,11 @@ root.render(
   <StrictMode>
     <Provider store={store}>
       <ApolloProvider client={client}>
-        <App />
+        <HelmetProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </HelmetProvider>
       </ApolloProvider>
     </Provider>
   </StrictMode>
