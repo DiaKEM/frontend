@@ -4,9 +4,8 @@ import './index.css';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { App } from './App';
-import { createClient } from './core/apollo-client/client';
+import { client } from './core/apollo-client/client';
 import { store } from './core/redux/store';
-import { getReactEnvVar } from './core/utils/environment';
 import { reportWebVitals } from './reportWebVitals';
 
 const rootElement = document.getElementById('root') as HTMLElement;
@@ -15,9 +14,7 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <ApolloProvider
-        client={createClient(getReactEnvVar('DIAKEM_BACKEND_API'))}
-      >
+      <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
     </Provider>
