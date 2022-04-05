@@ -10,6 +10,7 @@ import { client } from './core/apollo-client/client';
 import { store } from './core/redux/store';
 import { reportWebVitals } from './reportWebVitals';
 import 'simplebar/src/simplebar.css';
+import './core/i18n/i18n';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 const root = createRoot(rootElement);
