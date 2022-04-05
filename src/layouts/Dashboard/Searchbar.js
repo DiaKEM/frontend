@@ -1,9 +1,16 @@
+import {
+  Input,
+  Slide,
+  Button,
+  IconButton,
+  InputAdornment,
+  ClickAwayListener,
+} from '@mui/material';
+import { styled, alpha } from '@mui/material/styles';
 import { useState } from 'react';
 // material
-import { styled, alpha } from '@mui/material/styles';
-import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener } from '@mui/material';
 // component
-import Iconify from '../../components/Iconify';
+import { Iconify } from '../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -26,8 +33,8 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
   backgroundColor: `${alpha(theme.palette.background.default, 0.72)}`,
   [theme.breakpoints.up('md')]: {
     height: APPBAR_DESKTOP,
-    padding: theme.spacing(0, 5)
-  }
+    padding: theme.spacing(0, 5),
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -36,7 +43,7 @@ export default function Searchbar() {
   const [isOpen, setOpen] = useState(false);
 
   const handleOpen = () => {
-    setOpen((prev) => !prev);
+    setOpen(prev => !prev);
   };
 
   const handleClose = () => {

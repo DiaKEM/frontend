@@ -1,13 +1,21 @@
+import {
+  Button,
+  Box,
+  Divider,
+  MenuItem,
+  Typography,
+  Avatar,
+  IconButton,
+} from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { alpha } from '@mui/material/styles';
-import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
 // components
-import Iconify from '../../components/Iconify';
+import account from '../../_mocks_/account';
+import { Iconify } from '../../components/Iconify';
 import MenuPopover from '../../components/MenuPopover';
 //
-import account from '../../_mocks_/account';
 
 // ----------------------------------------------------------------------
 
@@ -15,18 +23,18 @@ const MENU_OPTIONS = [
   {
     label: 'Home',
     icon: 'eva:home-fill',
-    linkTo: '/'
+    linkTo: '/',
   },
   {
     label: 'Profile',
     icon: 'eva:person-fill',
-    linkTo: '#'
+    linkTo: '#',
   },
   {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
-    linkTo: '#'
-  }
+    linkTo: '#',
+  },
 ];
 
 // ----------------------------------------------------------------------
@@ -59,9 +67,9 @@ export default function AccountPopover() {
               height: '100%',
               borderRadius: '50%',
               position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72)
-            }
-          })
+              bgcolor: theme => alpha(theme.palette.grey[900], 0.72),
+            },
+          }),
         }}
       >
         <Avatar src={account.photoURL} alt="photoURL" />
@@ -84,7 +92,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ my: 1 }} />
 
-        {MENU_OPTIONS.map((option) => (
+        {MENU_OPTIONS.map(option => (
           <MenuItem
             key={option.label}
             to={option.linkTo}
@@ -97,7 +105,7 @@ export default function AccountPopover() {
               sx={{
                 mr: 2,
                 width: 24,
-                height: 24
+                height: 24,
               }}
             />
 

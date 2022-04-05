@@ -4,11 +4,10 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 // layouts
 import RegisterForm from './components/RegisterForm';
+import illustration from './register.png';
 import Page from '../../components/Page';
 import AuthLayout from '../../layouts/Auth/AuthLayout';
 // components
-import AuthSocial from '../Auth/components/AuthSocial';
-
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -57,10 +56,7 @@ export default function Register() {
         <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
           Manage the job more effectively with Minimal
         </Typography>
-        <img
-          alt="register"
-          src="/static/illustrations/illustration_register.png"
-        />
+        <img alt="register" src={illustration} />
       </SectionStyle>
 
       <Container>
@@ -73,8 +69,6 @@ export default function Register() {
               Free forever. No credit card needed.
             </Typography>
           </Box>
-
-          <AuthSocial />
 
           <RegisterForm />
 

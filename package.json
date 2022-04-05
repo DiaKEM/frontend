@@ -12,6 +12,7 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@faker-js/faker": "^6.1.2",
+    "@hookform/resolvers": "^2.8.8",
     "@iconify/react": "^3.2.1",
     "@mui/icons-material": "^5.5.1",
     "@mui/lab": "^5.0.0-alpha.75",

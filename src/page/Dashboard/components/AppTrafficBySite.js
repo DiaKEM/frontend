@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types';
 // material
 // utils
-import Iconify from '../../../components/Iconify';
+import { Iconify } from '../../../components/Iconify';
 import { fShortenNumber } from '../../../core/utils/helper/formatNumber';
 // component
 

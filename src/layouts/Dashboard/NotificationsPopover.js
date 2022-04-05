@@ -22,7 +22,7 @@ import { useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 // utils
-import Iconify from '../../components/Iconify';
+import { Iconify } from '../../components/Iconify';
 import MenuPopover from '../../components/MenuPopover';
 import Scrollbar from '../../components/Scrollbar';
 import { mockImgAvatar } from '../../core/utils/helper/mockImages';

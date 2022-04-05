@@ -1,8 +1,9 @@
+import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from '../../layouts/Dashboard';
 import LogoOnlyLayout from '../../layouts/LogoOnlyLayout';
 import NotFound from '../../page/404/Page404';
-import Login from '../../page/Auth/Login';
+import { LoginPage } from '../../page/Auth/LoginPage';
 import DashboardApp from '../../page/Dashboard/DashboardApp';
 import Register from '../../page/Registration/Register';
 
@@ -18,7 +19,7 @@ export const Router = () =>
       element: <LogoOnlyLayout />,
       children: [
         { path: '/', element: <Navigate to="/dashboard/app" /> },
-        { path: 'login', element: <Login /> },
+        { path: 'login', element: <LoginPage /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },

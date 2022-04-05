@@ -1,52 +1,93 @@
-import {
-  MutationLoginArgs,
-  User,
-} from '@diakem/api-bindings/src/bindings/react-apollo';
-import { AuthToken } from '@diakem/api-bindings/src/bindings/typescript';
-import { Button, TextField } from '@mui/material';
+import { Card, Stack, Link, Container, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import React from 'react';
-import { LOGIN } from './auth.graphql';
-import { useAsyncMutation } from '../../core/apollo-client/hooks/useAsyncMutation';
-import { useInputChange } from '../../core/utils/hook/useInputChange';
+import { Link as RouterLink } from 'react-router-dom';
+import { LoginForm } from './components/LoginForm';
+import illustration from './login.png';
+import Page from '../../components/Page';
+import { useScopedTranslation } from '../../core/utils/hook/useScopedTranslation';
+import AuthLayout from '../../layouts/Auth/AuthLayout';
+
+const RootStyle = styled(Page)<{ title: string }>(({ theme }) => ({
+  [theme.breakpoints.up('md')]: {
+    display: 'flex',
+  },
+}));
+
+const SectionStyle = styled(Card)(({ theme }) => ({
+  width: '100%',
+  maxWidth: 464,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  margin: theme.spacing(2, 0, 2, 2),
+}));
+
+const ContentStyle = styled('div')(({ theme }) => ({
+  maxWidth: 480,
+  margin: 'auto',
+  display: 'flex',
+  minHeight: '100vh',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  padding: theme.spacing(12, 0),
+}));
 
 export const LoginPage = () => {
-  const userName = useInputChange('testuser1');
-  const password = useInputChange('testuser1');
-  const [exec, { loading, error, data, executionTime }] = useAsyncMutation<
-    MutationLoginArgs,
-    { login: AuthToken }
-  >(LOGIN);
-
+  const { t } = useScopedTranslation('page.login');
   return (
-    <>
-      <pre>ERROR:{JSON.stringify(error)}</pre>
-      <pre>LOADING:{JSON.stringify(loading)}</pre>
-      <pre>DATA:{JSON.stringify(data?.data?.login.token)}</pre>
-      <pre>exectime:{JSON.stringify(executionTime)}</pre>
-      <TextField
-        {...userName.module}
-        placeholder="Username"
-        variant="outlined"
-        label="Username"
-      />
-      <TextField
-        type="password"
-        {...password.module}
-        placeholder="Password"
-        variant="outlined"
-        label="Password"
-      />
-      <Button
-        onClick={async () =>
-          exec({
-            username: userName.getValue() || '',
-            password: password.getValue() || '',
-          })
-        }
-        variant="contained"
-      >
-        Login
-      </Button>
-    </>
+    <RootStyle title={t('title')}>
+      <AuthLayout>
+        {t('not-registered')} &nbsp;
+        <Link
+          underline="none"
+          variant="subtitle2"
+          component={RouterLink}
+          to="/register"
+        >
+          {t('register-now')}
+        </Link>
+      </AuthLayout>
+
+      <SectionStyle sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+          {t('welcome-back')}
+        </Typography>
+        <img src={illustration} alt="login" />
+      </SectionStyle>
+
+      <Container maxWidth="sm">
+        <ContentStyle>
+          <Stack sx={{ mb: 5 }}>
+            <Typography variant="h4" gutterBottom>
+              {t('login')}
+            </Typography>
+            <Typography sx={{ color: 'text.secondary' }}>
+              {t('enter-credentials')}
+            </Typography>
+          </Stack>
+          <LoginForm />
+
+          <Typography
+            variant="body2"
+            align="center"
+            sx={{
+              mt: 3,
+              display: { sm: 'none' },
+            }}
+          >
+            {t('not-registered')}&nbsp;
+            <Link
+              variant="subtitle2"
+              component={RouterLink}
+              to="register"
+              underline="hover"
+            >
+              {t('register-now')}
+            </Link>
+          </Typography>
+        </ContentStyle>
+      </Container>
+    </RootStyle>
   );
 };

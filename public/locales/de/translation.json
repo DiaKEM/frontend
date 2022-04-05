@@ -1,7 +1,26 @@
 {
-  "title": "Willkommen zu react und react-i18next",
-  "description": {
-    "part1": "Um loszulegen, ändere <1>src/App(DE).js</1> und speichere um neuzuladen.",
-    "part2": "Wechsle die Sprache zwischen deutsch und englisch mit Hilfe der beiden Schalter."
+  "general": {
+    "app-name": "DiaKEM",
+    "validation": {
+      "required": "{{field}} darf nicht leer sein"
+    }
+  },
+  "page": {
+    "login": {
+      "title": "Anmelden | $t(general.app-name)",
+      "welcome-back": "Hey, willkommen zurück",
+      "not-registered": "Noch nicht registriert?",
+      "register-now": "Jetzt registrieren",
+      "login": "$t(general.app-name) Login",
+      "enter-credentials": "Bitte gebe deine Benutzerdaten ein",
+      "form": {
+        "username": "Benutzername",
+        "password": "Passwort",
+        "remember-me": "Angemeldet bleiben?",
+        "forgot-password": "Passwort vergessen?",
+        "login": "Anmelden",
+        "error": "Oooops, anscheinend stimmt das nicht ganz. Bitte überprüfe deine Eingabe und versuche es erneut."
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@
 import { Card, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 // utils
-import Iconify from '../../../components/Iconify';
+import { Iconify } from '../../../components/Iconify';
 import { fShortenNumber } from '../../../core/utils/helper/formatNumber';
 //
 
