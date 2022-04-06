@@ -1,18 +1,22 @@
-import { User } from '@diakem/api-bindings/src/bindings/react-apollo';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LOGIN } from './auth.graphql';
-import { client } from '../../core/apollo-client/client';
+import { AuthToken } from '@diakem/api-bindings/src/bindings/typescript';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/no-cycle
 import { RootState } from '../../core/redux/types';
+import {
+  removeTokenFromStorage,
+  setTokenInStorage,
+} from '../../core/utils/helper/authentication';
 
 export interface AuthState {
   authenticated: boolean;
-  user?: User | null;
+  loggedOut: boolean;
+  user?: AuthToken | null;
 }
 
 const initialState: AuthState = {
   authenticated: false,
   user: null,
+  loggedOut: false,
 };
 
 export const authSlice = createSlice({
@@ -20,17 +24,33 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     /* eslint-disable no-param-reassign */
-    login: (state, action: PayloadAction<User>) => {
+    login: (state, action: PayloadAction<AuthToken>) => {
       state.authenticated = true;
+      state.loggedOut = false;
       state.user = action.payload;
+      setTokenInStorage(action.payload.token);
     },
     logout: state => {
-      state = initialState;
+      state.authenticated = false;
+      state.user = null;
+      removeTokenFromStorage();
+    },
+    loggedOut: state => {
+      state.authenticated = false;
+      state.user = null;
+      state.loggedOut = true;
+      removeTokenFromStorage();
     },
     /* eslint-enable */
   },
 });
 
+export const {
+  login: loginAction,
+  logout: logoutAction,
+  loggedOut: loggedOutAction,
+} = authSlice.actions;
 export const base$ = (state: RootState) => state.auth;
 export const authenticated$ = (state: RootState) => state.auth.authenticated;
 export const user$ = (state: RootState) => state.auth.user;
+export const loggedOut$ = (state: RootState) => state.auth.loggedOut;

@@ -1,4 +1,5 @@
 // material
+import { gql, useLazyQuery } from '@apollo/client';
 import { Box, Grid, Container, Typography } from '@mui/material';
 // components
 import {
@@ -16,13 +17,24 @@ import {
   AppConversionRates,
 } from './components';
 import Page from '../../components/Page';
+import { useAsyncMutation } from '../../core/apollo-client/hooks/useAsyncMutation';
 
 // ----------------------------------------------------------------------
 
+const GET_USER = gql`
+  query ExampleQuery {
+    userMany {
+      name
+      email
+    }
+  }
+`;
 export default function DashboardApp() {
+  const [getDog, { loading, error, data }] = useLazyQuery(GET_USER);
   return (
     <Page title="Dashboard | Minimal-UI">
       <Container maxWidth="xl">
+        <button onClick={() => getDog()}>CLICK ME</button>
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Hi, Welcome back</Typography>
         </Box>

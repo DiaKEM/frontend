@@ -5,6 +5,12 @@
       "required": "{{field}} darf nicht leer sein"
     }
   },
+  "technical-problem": {
+    "title": "Oopps | $t(general.app-name)",
+    "caption": "Oh nein, es gibt ein technisches Problem",
+    "description": "Entschuldige bitte, es scheint ein technisches Problem mit deiner Instanz zu geben. Eventuell hilft aber auch das Aktualisieren der Seite damit sich alles wieder fängt \uD83D\uDE05. Bitte melde dich ansonsten umgehend bei uns, damit wir uns das Problem genauer ansehen können.",
+    "reload-page": "Jetzt aktualisieren"
+  },
   "page": {
     "login": {
       "title": "Anmelden | $t(general.app-name)",
@@ -19,7 +25,8 @@
         "remember-me": "Angemeldet bleiben?",
         "forgot-password": "Passwort vergessen?",
         "login": "Anmelden",
-        "error": "Oooops, anscheinend stimmt das nicht ganz. Bitte überprüfe deine Eingabe und versuche es erneut."
+        "error": "Oooops, anscheinend stimmt das nicht ganz. Bitte überprüfe deine Eingabe und versuche es erneut.",
+        "logged-out": "Oooops, deine Session ist abgelaufen - Bitte melde dich erneut an."
       }
     }
   }

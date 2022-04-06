@@ -10,18 +10,22 @@ import {
   IconButton,
   InputAdornment,
   FormControlLabel,
+  Fade,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { Iconify } from '../../../components/Iconify';
 import { useAsyncMutation } from '../../../core/apollo-client/hooks/useAsyncMutation';
+import { useAppDispatch, useAppSelector } from '../../../core/redux/hook';
 import { requiredMessage } from '../../../core/utils/helper/validationMessages';
 import { useExtendedForm } from '../../../core/utils/hook/useExtendedForm';
 import { useScopedTranslation } from '../../../core/utils/hook/useScopedTranslation';
 import { useToggle } from '../../../core/utils/hook/useToggle';
 import { LOGIN } from '../auth.graphql';
+import { loggedOut$, loginAction } from '../auth.slice';
 
 type FormData = {
   username: string;
@@ -29,9 +33,16 @@ type FormData = {
   remember: boolean;
 };
 
+const delay = (ms: number): Promise<void> =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+
 export const LoginForm = () => {
+  const loggedOut = useAppSelector(loggedOut$);
+  const dispatch = useAppDispatch();
   const { t } = useScopedTranslation('page.login.form');
-  const [exec, { loading, error, data }] = useAsyncMutation<
+  const [exec, { loading, error, data, reset }] = useAsyncMutation<
     MutationLoginArgs,
     { login: AuthToken }
   >(LOGIN);
@@ -58,11 +69,15 @@ export const LoginForm = () => {
       })
     );
 
-  if (data) {
-    return <pre>{JSON.stringify(data)}</pre>;
-  }
+  const handleLogin = async (loginData: FormData) => {
+    const response = await exec(loginData);
+    if (!response?.data) {
+      return;
+    }
 
-  const handleLogin = (loginData: FormData) => exec(loginData);
+    dispatch(loginAction(response?.data.login));
+    navigate('/');
+  };
 
   return (
     <form autoComplete="off" noValidate onSubmit={handleSubmit(handleLogin)}>
@@ -119,8 +134,24 @@ export const LoginForm = () => {
         </Link>
       </Stack>
 
-      {error && <Alert severity="error">{t('error')}</Alert>}
-      <br />
+      {loggedOut && (
+        <>
+          <Fade in={loggedOut} timeout={1000}>
+            <Alert severity="warning">{t('logged-out')}</Alert>
+          </Fade>
+          <br />
+        </>
+      )}
+
+      {error && (
+        <>
+          <Fade in={error} timeout={1000}>
+            <Alert severity="error">{t('error')}</Alert>
+          </Fade>
+          <br />
+        </>
+      )}
+
       <LoadingButton
         fullWidth
         size="large"
