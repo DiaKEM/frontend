@@ -28,7 +28,10 @@ export const authSlice = createSlice({
       state.authenticated = true;
       state.loggedOut = false;
       state.user = action.payload;
-      setTokenInStorage(action.payload.token);
+
+      if (action.payload.token) {
+        setTokenInStorage(action.payload.token);
+      }
     },
     logout: state => {
       state.authenticated = false;

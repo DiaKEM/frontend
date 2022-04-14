@@ -6,9 +6,8 @@ import {
   InMemoryCache,
   ServerError,
 } from '@apollo/client';
-import { NetworkError } from '@apollo/client/errors';
 import { onError } from '@apollo/client/link/error';
-import { loggedOutAction, logoutAction } from '../../page/Auth/auth.slice';
+import { loggedOutAction } from '../../page/Auth/auth.slice';
 import { store } from '../redux/store';
 import { getTokenFromStorage } from '../utils/helper/authentication';
 import { getReactEnvVar, isDevelopment } from '../utils/helper/environment';

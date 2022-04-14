@@ -32,5 +32,5 @@ export const HealthCheck = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  return <>children</>;
+  return <>{children}</>;
 };
